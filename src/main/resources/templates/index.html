@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+    </style>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+
+<table>
+    <tr>
+        <th>Room id</th>
+        <th>Room name</th>
+        <th>Maximum Capacity</th>
+        <th>Number of chairs</th>
+    </tr>
+    <table id="roomList">
+
+    </table>
+
+</table>
+
+<script>
+function loadRooms() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+   var rooms = JSON.parse(this.responseText);
+   var html = '';
+
+   for (var i=0;i<rooms.length;i++) {
+   var room = rooms[i];
+   console.log(room);
+
+   html = html+ '<tr><td>'+room.roomId+'</td>\n'+
+   '<td>'+room.roomName+'</td>\n' +
+   '<td>'+room.capacityMax+'</td>\n' +
+   '<td>'+room.chairs+'</td></tr>\n'
+   }
+      document.getElementById("roomList").innerHTML = html;
+    }
+
+  };
+  xhttp.open("GET", "http://localhost:8080/rooms/show", true);
+  xhttp.send();
+}
+loadRooms();
+
+
+</script>
+
+
+</body>
+</html>
