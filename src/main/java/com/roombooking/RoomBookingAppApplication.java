@@ -10,5 +10,5 @@ public class RoomBookingAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(RoomBookingAppApplication.class, args);
     }
-
+//Making sure that repository is working well
 }
